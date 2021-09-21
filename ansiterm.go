@@ -7,10 +7,14 @@ import (
 )
 
 const (
-	HOME        = "\033[2J"
+	HOME        = "\033[H"
+	CLRSCR      = "\033[2J"
+	ERASE_LINE  = "\033[K"
+	ERASE_EOL   = "\033[0K"
+	ERASE_SOL   = "\033[1K"
 	RESET       = "\033[0m"
 	RESET_COLOR = "\033[32m"
-	RESET_LINE  = "\r\033[K"
+	RESET_LINE  = "\r\033[2K"
 )
 
 var Out *bufio.Writer = bufio.NewWriter(os.Stdout)
@@ -57,7 +61,7 @@ func CursorLeft(count int) {
 	Out.Flush()
 }
 
-// StartOfLine returns carrier to start of line
+// StartOfLine returns cursor to start of line
 func StartOfLine() {
 	Out.WriteString(RESET_LINE)
 	Out.Flush()
