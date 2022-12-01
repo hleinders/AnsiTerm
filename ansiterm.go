@@ -4,6 +4,8 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+
+	"golang.org/x/term"
 )
 
 const (
@@ -25,11 +27,34 @@ func ClearScr() {
 	Out.Flush()
 }
 
-// Reset clears screen
+// Reset screen
 func Reset() {
 	Out.WriteString(RESET)
 	Out.Flush()
 }
+
+//
+// Terminal handling: ----------------------------------------------
+//
+
+// IsTTY checks for interactive terminal
+func IsTTY() bool {
+	return term.IsTerminal(int(os.Stdout.Fd()))
+}
+
+// HasColor checks color capabilities
+func HasColor() bool {
+	return os.Getenv("TERM") != "dumb" && IsTTY()
+}
+
+// GetSize retruen the current terminal size
+func GetSize() (int, int, error) {
+	return term.GetSize(int(os.Stdout.Fd()))
+}
+
+//
+// Cursor movement: ------------------------------------------------
+//
 
 // CursorPos moves cursor to position (x,y)
 func CursorPos(x int, y int) {
