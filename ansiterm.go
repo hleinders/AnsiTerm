@@ -45,6 +45,7 @@ var (
 	larrow       = "⋘"
 	bulletChar   = "•"
 	markChar     = "★"
+	contStr      = "…"
 )
 
 func AsciiChars() {
@@ -70,6 +71,7 @@ func AsciiChars() {
 	larrow = "<<<"
 	bulletChar = "*"
 	markChar = "*"
+	contStr = "..."
 
 	color.NoColor = true
 }
@@ -93,6 +95,10 @@ func GetRarrowChar() string {
 
 func GetLarrowChar() string {
 	return larrow
+}
+
+func GetContStr() string {
+	return contStr
 }
 
 var Out *bufio.Writer = bufio.NewWriter(os.Stdout)
@@ -199,6 +205,7 @@ var Faint = color.New(color.Faint).SprintFunc()
 var Italic = color.New(color.Italic).SprintFunc()
 var Underline = color.New(color.Underline).SprintFunc()
 var Strike = color.New(color.CrossedOut).SprintFunc()
+var Blink = color.New(color.BlinkSlow).SprintFunc()
 
 var Red = color.New(color.FgRed).SprintFunc()
 var Green = color.New(color.FgGreen).SprintFunc()
