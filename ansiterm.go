@@ -23,82 +23,57 @@ const (
 )
 
 var (
-	thinHLine    = "─"
-	frameHLine   = "━"
-	frameVLine   = "┃"
-	frameOpenR   = "┓"
-	frameTLineR  = "┫"
-	frameCloseR  = "┛"
-	frameOpenL   = "┏"
-	frameTLineL  = "┣"
-	frameCloseL  = "┗"
-	frameOHLine  = "═"
-	frameOVLine  = "║"
-	frameOOpenR  = "╗"
-	frameOTLineR = "╣"
-	frameOCloseR = "╝"
-	frameOOpenL  = "╔"
-	frameOTLineL = "╠"
-	frameOCloseL = "╚"
-	harrow       = "⋙"
-	rarrow       = "⋙"
-	larrow       = "⋘"
-	bulletChar   = "•"
-	markChar     = "★"
-	contStr      = "…"
+	ThinHLine    = "─"
+	FrameHLine   = "━"
+	FrameVLine   = "┃"
+	FrameOpenR   = "┓"
+	FrameTLineR  = "┫"
+	FrameCloseR  = "┛"
+	FrameOpenL   = "┏"
+	FrameTLineL  = "┣"
+	FrameCloseL  = "┗"
+	FrameOHLine  = "═"
+	FrameOVLine  = "║"
+	FrameOOpenR  = "╗"
+	FrameOTLineR = "╣"
+	FrameOCloseR = "╝"
+	FrameOOpenL  = "╔"
+	FrameOTLineL = "╠"
+	FrameOCloseL = "╚"
+	Harrow       = "⋙"
+	Rarrow       = "⋙"
+	Larrow       = "⋘"
+	BulletChar   = "•"
+	MarkChar     = "★"
+	ContStr      = "…"
 )
 
 func AsciiChars() {
-	thinHLine = "-"
-	frameHLine = "-"
-	frameVLine = "|"
-	frameOpenR = "+"
-	frameTLineR = "+"
-	frameCloseR = "+"
-	frameOpenL = "+"
-	frameTLineL = "+"
-	frameCloseL = "+"
-	frameOHLine = "="
-	frameOVLine = "|"
-	frameOOpenR = "+"
-	frameOTLineR = "+"
-	frameOCloseR = "+"
-	frameOOpenL = "+"
-	frameOTLineL = "+"
-	frameOCloseL = "+"
-	harrow = ">>>"
-	rarrow = ">>>"
-	larrow = "<<<"
-	bulletChar = "*"
-	markChar = "*"
-	contStr = "..."
+	ThinHLine = "-"
+	FrameHLine = "-"
+	FrameVLine = "|"
+	FrameOpenR = "+"
+	FrameTLineR = "+"
+	FrameCloseR = "+"
+	FrameOpenL = "+"
+	FrameTLineL = "+"
+	FrameCloseL = "+"
+	FrameOHLine = "="
+	FrameOVLine = "|"
+	FrameOOpenR = "+"
+	FrameOTLineR = "+"
+	FrameOCloseR = "+"
+	FrameOOpenL = "+"
+	FrameOTLineL = "+"
+	FrameOCloseL = "+"
+	Harrow = ">>>"
+	Rarrow = ">>>"
+	Larrow = "<<<"
+	BulletChar = "*"
+	MarkChar = "*"
+	ContStr = "..."
 
 	color.NoColor = true
-}
-
-// Helper Funcs
-func GetBulletChar() string {
-	return bulletChar
-}
-
-func GetMarkChar() string {
-	return markChar
-}
-
-func GetHarrowChar() string {
-	return harrow
-}
-
-func GetRarrowChar() string {
-	return rarrow
-}
-
-func GetLarrowChar() string {
-	return larrow
-}
-
-func GetContStr() string {
-	return contStr
 }
 
 var Out *bufio.Writer = bufio.NewWriter(os.Stdout)
@@ -232,7 +207,7 @@ func hline(n int) string {
 		n, _, _ = GetSize()
 	}
 
-	return strings.Repeat(thinHLine, n)
+	return strings.Repeat(ThinHLine, n)
 }
 
 // Printer is a little shortcut for verbose and debug output
@@ -267,16 +242,24 @@ func (l *Printer) SetSilent(b bool) {
 // Helper functions for Printer
 func (l Printer) Frame(str string) string {
 	sl := len(str)
-	rh := frameOpenL + strings.Repeat(frameHLine, sl+2) + frameOpenR
-	rt := frameCloseL + strings.Repeat(frameHLine, sl+2) + frameCloseR
-	return fmt.Sprintf("%s\n%s %s %s\n%s\n", rh, frameVLine, str, frameVLine, rt)
+	rh := FrameOpenL + strings.Repeat(FrameHLine, sl+2) + FrameOpenR
+	rt := FrameCloseL + strings.Repeat(FrameHLine, sl+2) + FrameCloseR
+	return fmt.Sprintf("%s\n%s %s %s\n%s\n", rh, FrameVLine, str, FrameVLine, rt)
 }
 
 func (l Printer) OFrame(str string) string {
 	sl := len(str)
-	rh := frameOOpenL + strings.Repeat(frameOHLine, sl+2) + frameOOpenR
-	rt := frameOCloseL + strings.Repeat(frameOHLine, sl+2) + frameOCloseR
-	return fmt.Sprintf("\n%s\n%s %s %s\n%s\n", rh, frameOVLine, str, frameOVLine, rt)
+	rh := FrameOOpenL + strings.Repeat(FrameOHLine, sl+2) + FrameOOpenR
+	rt := FrameOCloseL + strings.Repeat(FrameOHLine, sl+2) + FrameOCloseR
+	return fmt.Sprintf("\n%s\n%s %s %s\n%s\n", rh, FrameOVLine, str, FrameOVLine, rt)
+}
+
+func (l Printer) Underlines(row []string) []string {
+	anonRow := make([]string, len(row))
+	for i, v := range row {
+		anonRow[i] = strings.Repeat(FrameHLine, len(v))
+	}
+	return anonRow
 }
 
 func (l Printer) WriteOut(fmtString string, args ...interface{}) {
