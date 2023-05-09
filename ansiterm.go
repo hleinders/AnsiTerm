@@ -202,12 +202,12 @@ var HiWhite = color.New(color.FgHiWhite).SprintFunc()
 // Little Printer: ------------------------------------------------
 //
 
-func hline(n int) string {
+func hline(lchar string, n int) string {
 	if n == 0 {
 		n, _, _ = GetSize()
 	}
 
-	return strings.Repeat(ThinHLine, n)
+	return strings.Repeat(lchar, n)
 }
 
 // Printer is a little shortcut for verbose and debug output
@@ -275,6 +275,13 @@ func (l Printer) WriteAny(fmtString string, args ...interface{}) {
 // Print functions for logger
 func (l Printer) Banner(fmtString string, args ...interface{}) {
 	rStr := fmt.Sprintf(fmtString, args...)
+	str := l.Frame(rStr)
+	l.WriteOut(Bold(Green(str)))
+}
+
+// Print functions for logger
+func (l Printer) OBanner(fmtString string, args ...interface{}) {
+	rStr := fmt.Sprintf(fmtString, args...)
 	str := l.OFrame(rStr)
 	l.WriteOut(Bold(Green(str)))
 }
@@ -282,7 +289,7 @@ func (l Printer) Banner(fmtString string, args ...interface{}) {
 func (p Printer) ModuleHeading(subPage bool, modName, fmtString string, args ...interface{}) {
 	var eStr string
 	if subPage {
-		fmt.Println("\n" + hline(80))
+		fmt.Println("\n" + hline(ThinHLine, 80))
 		eStr = fmt.Sprintf("\nModule %-10s   %s\n", modName+":", fmt.Sprintf(fmtString, args...))
 	} else {
 		eStr = fmt.Sprintf("\nUsage:   %s\n", fmt.Sprintf(fmtString, args...))
