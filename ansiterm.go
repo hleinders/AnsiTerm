@@ -46,6 +46,7 @@ var (
 	BulletChar   = "•"
 	MarkChar     = "★"
 	ContStr      = "…"
+	PromptChar   = "»"
 )
 
 func AsciiChars() {
@@ -72,6 +73,7 @@ func AsciiChars() {
 	BulletChar = "*"
 	MarkChar = "*"
 	ContStr = "..."
+	PromptChar = ">"
 
 	color.NoColor = true
 }
