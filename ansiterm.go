@@ -39,7 +39,7 @@ var (
 	FrameOTLineL = "╠"
 	FrameOCloseL = "╚"
 	Harrow       = "⋙"
-	Rarrow       = "⋙"
+	Rarrow       = "⮕"
 	Larrow       = "⋘"
 	BulletChar   = "•"
 	MarkChar     = "★"
