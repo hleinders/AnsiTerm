@@ -98,19 +98,11 @@ func GetSize() (int, int, error) {
 }
 
 func IsColorTerm() bool {
-	noColor := false
+	return HasColor() && IsTTY()
+}
 
-	if HasColor() {
-		noColor = false
-	} else {
-		noColor = true
-	}
-
-	if !IsTTY() {
-		noColor = true
-	}
-
-	return noColor
+func NoColor() bool {
+	return !IsColorTerm()
 }
 
 //
