@@ -39,6 +39,8 @@ var (
 	FrameOTLineL = "╠"
 	FrameOCloseL = "╚"
 	Harrow       = "⮕"
+	HRarrow      = "⮕"
+	HLarrow      = "⬅"
 	Rarrow       = "⋙"
 	Larrow       = "⋘"
 	BulletChar   = "•"
@@ -92,7 +94,7 @@ func HasColor() bool {
 	return os.Getenv("TERM") != "dumb" && IsTTY()
 }
 
-// GetSize retruen the current terminal size
+// GetSize returns the current terminal size (width int, height int, err error)
 func GetSize() (int, int, error) {
 	return term.GetSize(int(os.Stdout.Fd()))
 }
