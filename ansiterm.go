@@ -92,7 +92,7 @@ func IsTTY() bool {
 
 // HasColor checks color capabilities
 func HasColor() bool {
-	return os.Getenv("TERM") != "dumb" && IsTTY()
+	return os.Getenv("TERM") != "dumb" && IsTTY() && os.Getenv("NO_COLOR") != ""
 }
 
 // GetSize returns the current terminal size (width int, height int, err error)
